@@ -1,11 +1,14 @@
-# Quote Normalizer Browser Extension
+# Quote Normalizer Browser Extension 
+
+![icon-128](https://github.com/user-attachments/assets/7c3dfca4-b689-46b2-ab22-55267504f2fb)
+
 
 A browser extension that automatically displays normalized quotes on web pages in real-time.
 
 ## Features
 
 - **Visual Normalization**: Optionally displays normalized quotes on web pages in real-time
-- **Flexible Conversion**: Convert between straight quotes (`" "` `' '`) and curly quotes (`“ ”` `‘ ’`)
+- **Flexible Conversion**: Convert between straight quotes (`“ ”` `‘ ’`) and curly quotes (`“ ”` `‘ ’`)
 - **Cross-Browser Support**: Works with Chrome, Firefox, and other Chromium-based browsers
 - **Real-time Settings**: Changes apply immediately without page refresh
 - **Lightweight**: Minimal performance impact
@@ -20,28 +23,28 @@ A browser extension that automatically displays normalized quotes on web pages i
 #### Chrome/Chromium Browsers
 1. Clone or download this repository
 2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" in the top right
-4. Click "Load unpacked" and select the extension folder
+3. Enable “Developer mode” in the top right
+4. Click “Load unpacked” and select the extension folder
 5. The Quote Normalizer icon should appear in your toolbar
 
 #### Firefox
 1. Clone or download this repository
 2. Open Firefox and navigate to `about:debugging`
-3. Click "This Firefox" in the left sidebar
-4. Click "Load Temporary Add-on"
+3. Click “This Firefox” in the left sidebar
+4. Click “Load Temporary Add-on”
 5. Select the `manifest.json` file from the extension folder
 
 ## Usage
 
 ### Basic Setup
 1. Click the Quote Normalizer icon in your browser toolbar
-2. Toggle "Enable Quote Normalization" to activate the extension
+2. Toggle “Enable Quote Normalization” to activate the extension
 3. Choose your preferred quote style:
-   - **Straight quotes**: `" "` and `' '`
+   - **Straight quotes**: `“ ”` and `‘ ’`
    - **Curly quotes**: `“ ”` and `‘ ’`
 
 ### Visual Normalization
-The extension can also display normalized quotes directly on web pages. This is a visual-only change that doesn't affect the actual page content and is reversed when the extension is disabled.
+The extension can also display normalized quotes directly on web pages. This is a visual-only change that doesn‘t affect the actual page content and is reversed when the extension is disabled.
 
 ## Settings
 
@@ -54,7 +57,7 @@ Access settings by clicking the extension icon:
 ## Examples
 
 ### Straight Quotes Mode
-- `She said "Hello" and 'Hi'`
+- `She said “Hello” and ‘Hi’`
 
 ### Curly Quotes Mode  
 - `She said “Hello” and ‘Hi’`
