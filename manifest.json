@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Quote Normalizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Normalize curly quotes to straight quotes (or vice versa) when copying text",
   
   "icons": {
@@ -45,7 +45,7 @@
   
   "browser_specific_settings": {
     "gecko": {
-      "id": "quote-normalizer@example.com"
+      "id": "{23428114-7b67-4a9d-bef0-1929afddef06}"
     }
   }
 }

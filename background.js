@@ -19,12 +19,14 @@ class QuoteConverter {
   
   static convertToCurly(text) {
     let inDoubleQuote = false;
+    let inSingleQuote = false;
     return text.replace(/['"]/g, char => {
       if (char === '"') {
         inDoubleQuote = !inDoubleQuote;
         return inDoubleQuote ? '\u201c' : '\u201d';
       } else if (char === "'") {
-        return '\u2018';
+        inSingleQuote = !inSingleQuote;
+        return inSingleQuote ? '\u2018' : '\u2019';
       }
       return char;
     });
