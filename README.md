@@ -29,7 +29,7 @@ A browser extension that automatically displays normalized quotes on web pages i
 ## Features
 
 - **Visual Normalization**: Optionally displays normalized quotes on web pages in real-time
-- **Flexible Conversion**: Convert between straight quotes (`" "` `' '`) and curly quotes (`" "` `' '`)
+- **Flexible Conversion**: Convert between straight quotes (`" "` `' '`) and curly quotes (`“ ”` `‘ ’`)
 - **Cross-Browser Support**: Works with Chrome, Firefox, and other Chromium-based browsers
 - **Real-time Settings**: Changes apply immediately without page refresh
 - **Lightweight**: Minimal performance impact
@@ -62,7 +62,7 @@ A browser extension that automatically displays normalized quotes on web pages i
 2. Toggle "Enable Quote Normalization" to activate the extension
 3. Choose your preferred quote style:
    - **Straight quotes**: `" "` and `' '`
-   - **Curly quotes**: `" "` and `' '`
+   - **Curly quotes**: `“ ”` and `‘ ’`
 
 ### Visual Normalization
 The extension can also display normalized quotes directly on web pages. This is a visual-only change that doesn't affect the actual page content and is reversed when the extension is disabled.
@@ -81,13 +81,13 @@ Access settings by clicking the extension icon:
 - `She said "Hello" and 'Hi'`
 
 ### Curly Quotes Mode  
-- `She said "Hello" and 'Hi'`
+- `She said “Hello” and ‘Hi’`
 
 ## Technical Details
 
 ### Quote Characters Supported
-- **Curly Double Quotes**: `"` (U+201C), `"` (U+201D)
-- **Curly Single Quotes**: `'` (U+2018), `'` (U+2019)
+- **Curly Double Quotes**: `“` (U+201C), `”` (U+201D)
+- **Curly Single Quotes**: `‘` (U+2018), `’` (U+2019)
 - **Straight Double Quotes**: `"` (U+0022)
 - **Straight Single Quotes**: `'` (U+0027)
 
@@ -113,11 +113,11 @@ This extension:
 quote-normalizer-extension/
 ├── manifest.json          # Extension configuration
 ├── background.js          # Service worker for quote conversion
-├── content.js            # Page interaction and visual normalization
-├── popup.html            # Settings interface
-├── popup.js              # Settings logic
-├── icons/                # Extension icons
-└── README.md            # This file
+├── content.js             # Page interaction and visual normalization
+├── popup.html             # Settings interface
+├── popup.js               # Settings logic
+├── icons/                 # Extension icons
+└── README.md              # This file
 ```
 
 ### Building
