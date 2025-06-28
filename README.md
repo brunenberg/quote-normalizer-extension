@@ -2,13 +2,34 @@
 
 ![icon-128](https://github.com/user-attachments/assets/7c3dfca4-b689-46b2-ab22-55267504f2fb)
 
-
 A browser extension that automatically displays normalized quotes on web pages in real-time.
+
+## Screenshots
+
+<details>
+<summary>🖼️ Click to view extension settings popup</summary>
+
+![quote-normalizer-settings](https://github.com/user-attachments/assets/23e43229-7df2-4f17-8f80-19a6f3d6f2b6)
+
+</details>
+
+<details>
+<summary>🖼️ Click to view quote examples</summary>
+
+**Straight quotes example:**
+
+![straight-quotes-example](https://github.com/user-attachments/assets/e2eb60a7-742b-4655-9b55-b1916e6708af)
+
+**Curly quotes example:**
+
+![curly-quotes-example](https://github.com/user-attachments/assets/1c6851ba-ec5b-4ec9-a9a2-3bfb0189451e)
+
+</details>
 
 ## Features
 
 - **Visual Normalization**: Optionally displays normalized quotes on web pages in real-time
-- **Flexible Conversion**: Convert between straight quotes (`“ ”` `‘ ’`) and curly quotes (`“ ”` `‘ ’`)
+- **Flexible Conversion**: Convert between straight quotes (`" "` `' '`) and curly quotes (`" "` `' '`)
 - **Cross-Browser Support**: Works with Chrome, Firefox, and other Chromium-based browsers
 - **Real-time Settings**: Changes apply immediately without page refresh
 - **Lightweight**: Minimal performance impact
@@ -23,28 +44,28 @@ A browser extension that automatically displays normalized quotes on web pages i
 #### Chrome/Chromium Browsers
 1. Clone or download this repository
 2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable “Developer mode” in the top right
-4. Click “Load unpacked” and select the extension folder
+3. Enable "Developer mode" in the top right
+4. Click "Load unpacked" and select the extension folder
 5. The Quote Normalizer icon should appear in your toolbar
 
 #### Firefox
 1. Clone or download this repository
 2. Open Firefox and navigate to `about:debugging`
-3. Click “This Firefox” in the left sidebar
-4. Click “Load Temporary Add-on”
+3. Click "This Firefox" in the left sidebar
+4. Click "Load Temporary Add-on"
 5. Select the `manifest.json` file from the extension folder
 
 ## Usage
 
 ### Basic Setup
 1. Click the Quote Normalizer icon in your browser toolbar
-2. Toggle “Enable Quote Normalization” to activate the extension
+2. Toggle "Enable Quote Normalization" to activate the extension
 3. Choose your preferred quote style:
-   - **Straight quotes**: `“ ”` and `‘ ’`
-   - **Curly quotes**: `“ ”` and `‘ ’`
+   - **Straight quotes**: `" "` and `' '`
+   - **Curly quotes**: `" "` and `' '`
 
 ### Visual Normalization
-The extension can also display normalized quotes directly on web pages. This is a visual-only change that doesn‘t affect the actual page content and is reversed when the extension is disabled.
+The extension can also display normalized quotes directly on web pages. This is a visual-only change that doesn't affect the actual page content and is reversed when the extension is disabled.
 
 ## Settings
 
@@ -57,16 +78,16 @@ Access settings by clicking the extension icon:
 ## Examples
 
 ### Straight Quotes Mode
-- `She said “Hello” and ‘Hi’`
+- `She said "Hello" and 'Hi'`
 
 ### Curly Quotes Mode  
-- `She said “Hello” and ‘Hi’`
+- `She said "Hello" and 'Hi'`
 
 ## Technical Details
 
 ### Quote Characters Supported
-- **Curly Double Quotes**: `“` (U+201C), `”` (U+201D)
-- **Curly Single Quotes**: `‘` (U+2018), `’` (U+2019)
+- **Curly Double Quotes**: `"` (U+201C), `"` (U+201D)
+- **Curly Single Quotes**: `'` (U+2018), `'` (U+2019)
 - **Straight Double Quotes**: `"` (U+0022)
 - **Straight Single Quotes**: `'` (U+0027)
 
