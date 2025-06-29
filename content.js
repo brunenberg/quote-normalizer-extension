@@ -6,15 +6,24 @@ class ClipboardHandler {
     this.initialized = false;
     this.observer = null;
     this.originalTexts = new WeakMap();
+    this.pageHasQuotes = false;
     this.init();
   }
   
   async init() {
     await this.loadSettings();
     this.bindEvents();
-    this.startVisualNormalization();
+    this.checkPageForQuotes();
+    if (this.pageHasQuotes) {
+      this.startVisualNormalization();
+    }
     this.initialized = true;
     console.log('Quote Normalizer initialized with settings:', this.settings);
+  }
+  
+  checkPageForQuotes() {
+    const bodyText = document.body?.textContent || '';
+    this.pageHasQuotes = this.hasQuotes(bodyText);
   }
   
   async loadSettings() {
@@ -35,6 +44,7 @@ class ClipboardHandler {
     browser.storage.onChanged.addListener((changes) => {
       this.loadSettings().then(() => {
         if (changes.enabled || changes.convertTo) {
+          this.checkPageForQuotes();
           this.updateVisualNormalization();
         }
       });
@@ -42,14 +52,14 @@ class ClipboardHandler {
   }
   
   startVisualNormalization() {
-    if (this.settings.enabled) {
+    if (this.settings.enabled && this.pageHasQuotes) {
       this.normalizePageQuotes();
       this.startMutationObserver();
     }
   }
   
   updateVisualNormalization() {
-    if (this.settings.enabled) {
+    if (this.settings.enabled && this.pageHasQuotes) {
       this.restoreOriginalQuotes();
       this.normalizePageQuotes();
       if (!this.observer) {
@@ -61,20 +71,46 @@ class ClipboardHandler {
     }
   }
   
+  shouldSkipElement(element) {
+    if (!element || !element.tagName) return true;
+    
+    const tagName = element.tagName.toLowerCase();
+    const skipTags = ['script', 'style', 'svg', 'canvas', 'iframe', 'object', 'embed'];
+    if (skipTags.includes(tagName)) return true;
+    
+    const skipClasses = ['layout', 'grid', 'flex', 'container', 'wrapper'];
+    const className = element.className || '';
+    if (skipClasses.some(cls => className.includes(cls))) return true;
+    
+    return false;
+  }
+  
   normalizePageQuotes() {
+    if (!this.pageHasQuotes) return;
+    
     const walker = document.createTreeWalker(
       document.body,
       NodeFilter.SHOW_TEXT,
-      null,
+      {
+        acceptNode: (node) => {
+          if (!this.hasQuotes(node.textContent)) return NodeFilter.FILTER_REJECT;
+          
+          let parent = node.parentElement;
+          while (parent) {
+            if (this.shouldSkipElement(parent)) return NodeFilter.FILTER_REJECT;
+            parent = parent.parentElement;
+          }
+          
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      },
       false
     );
 
     const textNodes = [];
     let node;
     while (node = walker.nextNode()) {
-      if (this.hasQuotes(node.textContent)) {
-        textNodes.push(node);
-      }
+      textNodes.push(node);
     }
 
     textNodes.forEach(textNode => {
@@ -127,32 +163,54 @@ class ClipboardHandler {
   }
   
   startMutationObserver() {
-    if (this.observer) return;
+    if (this.observer || !this.pageHasQuotes) return;
 
     this.observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (node.nodeType === Node.TEXT_NODE && this.hasQuotes(node.textContent)) {
-            this.originalTexts.set(node, node.textContent);
-            const convertedText = this.convertQuotesForDisplay(node.textContent);
-            if (node.textContent !== convertedText) {
-              node.textContent = convertedText;
+            let parent = node.parentElement;
+            let shouldSkip = false;
+            while (parent) {
+              if (this.shouldSkipElement(parent)) {
+                shouldSkip = true;
+                break;
+              }
+              parent = parent.parentElement;
             }
-          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            
+            if (!shouldSkip) {
+              this.originalTexts.set(node, node.textContent);
+              const convertedText = this.convertQuotesForDisplay(node.textContent);
+              if (node.textContent !== convertedText) {
+                node.textContent = convertedText;
+              }
+            }
+          } else if (node.nodeType === Node.ELEMENT_NODE && !this.shouldSkipElement(node)) {
             const walker = document.createTreeWalker(
               node,
               NodeFilter.SHOW_TEXT,
-              null,
+              {
+                acceptNode: (textNode) => {
+                  if (!this.hasQuotes(textNode.textContent)) return NodeFilter.FILTER_REJECT;
+                  
+                  let parent = textNode.parentElement;
+                  while (parent && parent !== node) {
+                    if (this.shouldSkipElement(parent)) return NodeFilter.FILTER_REJECT;
+                    parent = parent.parentElement;
+                  }
+                  
+                  return NodeFilter.FILTER_ACCEPT;
+                }
+              },
               false
             );
             let textNode;
             while (textNode = walker.nextNode()) {
-              if (this.hasQuotes(textNode.textContent)) {
-                this.originalTexts.set(textNode, textNode.textContent);
-                const convertedText = this.convertQuotesForDisplay(textNode.textContent);
-                if (textNode.textContent !== convertedText) {
-                  textNode.textContent = convertedText;
-                }
+              this.originalTexts.set(textNode, textNode.textContent);
+              const convertedText = this.convertQuotesForDisplay(textNode.textContent);
+              if (textNode.textContent !== convertedText) {
+                textNode.textContent = convertedText;
               }
             }
           }
